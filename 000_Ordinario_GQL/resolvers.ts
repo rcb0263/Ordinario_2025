@@ -34,7 +34,6 @@ export const resolvers = {
             console.log(insertedId+"    "+name+"  "+adress+"  "+city+"  "+phone)
 
             return {
-                _id : new ObjectId(insertedId),
                 name: name,
                 adress: adress,
                 city: city,
