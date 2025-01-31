@@ -11,10 +11,10 @@ type argsAdd={
 export const resolvers = {
     Query: 
     {
-
+        
     },
 
-    Mutations:
+    Mutation:
     {
         async addRestaurant (
             _:unknown,
@@ -22,7 +22,8 @@ export const resolvers = {
             ctx: {restaurantCollection: Collection<RestaurantModel>}
         ): Promise<RestaurantModel>  {
             const {name, adress, city, phone} = args
-            const insert = await ctx.restaurantCollection.insertOne( 
+            console.log(name+"  "+adress+"  "+city+"  "+phone)
+            const {insertedId} = await ctx.restaurantCollection.insertOne(
                 {
                     name: name,
                     adress: adress,
@@ -30,9 +31,10 @@ export const resolvers = {
                     phone: phone
                 }
             )
+            console.log(insertedId+"    "+name+"  "+adress+"  "+city+"  "+phone)
 
             return {
-                _id : new ObjectId(insert.insertedId),
+                _id : new ObjectId(insertedId),
                 name: name,
                 adress: adress,
                 city: city,
